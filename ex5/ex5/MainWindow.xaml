@@ -20,12 +20,12 @@
         <Label Margin="3" Grid.ColumnSpan="3">Lista użytkowników</Label>
         <Button Margin="3" Padding="3" Grid.Row="2" Grid.ColumnSpan="3">Zamknij</Button>
         <StackPanel Margin="3" Grid.Column="2" Grid.Row="1">
-            <Button Margin="3" Padding="10,3" >Dodaj...</Button>
-            <Button Margin="3" Padding="10,3" >Usuń</Button>
-            <Button Margin="3" Padding="10,3" >Edytuj...</Button>
-            <Button Margin="3" Padding="10,3" >Podgląd...</Button>
+            <Button Name="addButton" Margin="3" Padding="10,3" Click="AddButton_Click" >Dodaj...</Button>
+            <Button Name="removeButton" Margin="3" Padding="10,3" >Usuń</Button>
+            <Button Name="editButton" Margin="3" Padding="10,3" Click="EditButton_Click" >Edytuj...</Button>
+            <Button Name="previewButton" Margin="3" Padding="10,3" >Podgląd...</Button>
         </StackPanel>
-        <ListBox Margin="3" Grid.Row="1"/>
+        <ListBox Name="usersList" Margin="3" Grid.Row="1"/>
         <GridSplitter Grid.Column="1" Grid.Row="1" Width="5" ResizeDirection="Columns" HorizontalAlignment="Center"/>
     </Grid>
 </Window>
