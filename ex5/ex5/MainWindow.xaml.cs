@@ -20,9 +20,16 @@ namespace ex5
     /// </summary>
     public partial class MainWindow : Window
     {
+        private User selectedUser;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            selectedUser = usersList.SelectedItem as User;
+
+            editButton.IsEnabled = false;
+            removeButton.IsEnabled = false;
         }
 
         private void UpdateUser(User user, string firstName, string lastName, string email)
@@ -35,7 +42,7 @@ namespace ex5
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             UserDlg dlg = new UserDlg();
-            if(dlg.ShowDialog() == true)
+            if (dlg.ShowDialog() == true)
             {
                 User user = new User
                 {
@@ -49,21 +56,47 @@ namespace ex5
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            User user = usersList.SelectedItem as User;
+            UserDlg dlg = new UserDlg();
+            dlg.FirstName = selectedUser.FirstName;
+            dlg.LastName = selectedUser.LastName;
+            dlg.Email = selectedUser.Email;
 
-            if(user != null)
+            if (dlg.ShowDialog() == true)
             {
-                UserDlg dlg = new UserDlg();
-                dlg.FirstName = user.FirstName;
-                dlg.LastName = user.LastName;
-                dlg.Email = user.Email;
-
-                if (dlg.ShowDialog() == true)
-                {
-                    UpdateUser(user, dlg.FirstName, dlg.LastName, dlg.Email);
-                    usersList.Items.Refresh();
-                }
+                UpdateUser(selectedUser, dlg.FirstName, dlg.LastName, dlg.Email);
+                usersList.Items.Refresh();
             }
+        }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(MessageBox.Show("Czy na pewno chcesz usunąć użytkownika\n" + selectedUser.FirstName + " " + selectedUser.LastName + "?", "Usuwanie użytkownika", 
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                usersList.Items.Remove(selectedUser);
+                selectedUser = null;
+            }
+        }
+
+        private void UsersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedUser = usersList.SelectedItem as User;
+
+            if(selectedUser == null)
+            {
+                editButton.IsEnabled = false;
+                removeButton.IsEnabled = false;
+            }
+            else
+            {
+                editButton.IsEnabled = true;
+                removeButton.IsEnabled = true;
+            }
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

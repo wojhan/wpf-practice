@@ -18,14 +18,14 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Label Margin="3" Grid.ColumnSpan="3">Lista użytkowników</Label>
-        <Button Margin="3" Padding="3" Grid.Row="2" Grid.ColumnSpan="3">Zamknij</Button>
+        <Button Name="CloseButton" Margin="3" Padding="3" Grid.Row="2" Grid.ColumnSpan="3" Click="CloseButton_Click">Zamknij</Button>
         <StackPanel Margin="3" Grid.Column="2" Grid.Row="1">
             <Button Name="addButton" Margin="3" Padding="10,3" Click="AddButton_Click" >Dodaj...</Button>
-            <Button Name="removeButton" Margin="3" Padding="10,3" >Usuń</Button>
+            <Button Name="removeButton" Margin="3" Padding="10,3" Click="RemoveButton_Click">Usuń</Button>
             <Button Name="editButton" Margin="3" Padding="10,3" Click="EditButton_Click" >Edytuj...</Button>
             <Button Name="previewButton" Margin="3" Padding="10,3" >Podgląd...</Button>
         </StackPanel>
-        <ListBox Name="usersList" Margin="3" Grid.Row="1"/>
+        <ListBox Name="usersList" Margin="3" Grid.Row="1" SelectionChanged="UsersList_SelectionChanged"/>
         <GridSplitter Grid.Column="1" Grid.Row="1" Width="5" ResizeDirection="Columns" HorizontalAlignment="Center"/>
     </Grid>
 </Window>
