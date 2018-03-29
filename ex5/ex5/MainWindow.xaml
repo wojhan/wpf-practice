@@ -23,7 +23,7 @@
             <Button Name="addButton" Margin="3" Padding="10,3" Click="AddButton_Click" >Dodaj...</Button>
             <Button Name="removeButton" Margin="3" Padding="10,3" Click="RemoveButton_Click">Usuń</Button>
             <Button Name="editButton" Margin="3" Padding="10,3" Click="EditButton_Click" >Edytuj...</Button>
-            <Button Name="previewButton" Margin="3" Padding="10,3" >Podgląd...</Button>
+            <Button Name="previewButton" Margin="3" Padding="10,3" Click="PreviewButton_Click" >Podgląd...</Button>
         </StackPanel>
         <ListBox Name="usersList" Margin="3" Grid.Row="1" SelectionChanged="UsersList_SelectionChanged"/>
         <GridSplitter Grid.Column="1" Grid.Row="1" Width="5" ResizeDirection="Columns" HorizontalAlignment="Center"/>

@@ -20,6 +20,7 @@ namespace ex5
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<UserPrv> prv;
         private User selectedUser;
 
         public MainWindow()
@@ -27,16 +28,44 @@ namespace ex5
             InitializeComponent();
 
             selectedUser = usersList.SelectedItem as User;
+            prv = new List<UserPrv>();
 
             editButton.IsEnabled = false;
             removeButton.IsEnabled = false;
+            previewButton.IsEnabled = false;
         }
 
-        private void UpdateUser(User user, string firstName, string lastName, string email)
+        public void UpdateUser(User user, string firstName, string lastName, string email)
         {
             user.FirstName = firstName;
             user.LastName = lastName;
             user.Email = email;
+            UpdateUsers();
+        }
+
+        public void UpdateUsers()
+        {
+            usersList.Items.Refresh();
+        }
+
+        public void UpdatePreview()
+        {
+            foreach (UserPrv userPrv in prv)
+            {
+                if (selectedUser != null)
+                {
+                    userPrv.SelectedUser = selectedUser;
+                    userPrv.LoadUser();
+                }
+            }
+        }
+
+        private void closePreviews()
+        {
+            foreach (UserPrv userPrv in prv)
+            {
+                userPrv.Close();
+            }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -64,7 +93,7 @@ namespace ex5
             if (dlg.ShowDialog() == true)
             {
                 UpdateUser(selectedUser, dlg.FirstName, dlg.LastName, dlg.Email);
-                usersList.Items.Refresh();
+                UpdatePreview();
             }
         }
 
@@ -74,6 +103,7 @@ namespace ex5
                 MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 usersList.Items.Remove(selectedUser);
+                closePreviews();
                 selectedUser = null;
             }
         }
@@ -82,21 +112,33 @@ namespace ex5
         {
             selectedUser = usersList.SelectedItem as User;
 
-            if(selectedUser == null)
+            if (selectedUser == null)
             {
                 editButton.IsEnabled = false;
                 removeButton.IsEnabled = false;
+                previewButton.IsEnabled = false;
             }
             else
             {
                 editButton.IsEnabled = true;
                 removeButton.IsEnabled = true;
+                previewButton.IsEnabled = true;
             }
+            UpdatePreview();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void PreviewButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserPrv userPrv = new UserPrv();
+            prv.Add(userPrv);
+            userPrv.SelectedUser = selectedUser;
+            userPrv.LoadUser();
+            userPrv.Show();
         }
     }
 }

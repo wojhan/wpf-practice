@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ex5
 {
-    class User
+    public class User
     {
         private string firstname, lastname, email;
 
