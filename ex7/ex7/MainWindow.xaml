@@ -6,13 +6,16 @@
         xmlns:local="clr-namespace:ex7"
         mc:Ignorable="d"
         Title="Osoby" Height="375" Width="800">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:UserCommands.AddUser" Executed="AddUser_Executed" CanExecute="AddUser_CanExecute"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <ListBox Margin="10" Padding="5 5 0 5">
-            <ListBoxItem Name="AddPerson">Dodaj nową osobę...</ListBoxItem>
+        <ListBox Name="usersList" Margin="10" Padding="5 5 0 5" SelectionChanged="usersList_SelectionChanged">
+
         </ListBox>
         <Grid Grid.Column="1" Margin="10">
             <Grid.RowDefinitions>
@@ -28,7 +31,7 @@
             <Label Margin="0 5">Imię</Label>
             <TextBox Name="FirstNameInput" Grid.Column="1" Margin="10 5" Text=""></TextBox>
             <Label Grid.Row="1" Margin="0 5">Nazwisko</Label>
-            <TextBox Name="LastNameInput" Grid.Row="1" Grid.Column="1" Margin="10 5"></TextBox>
+            <TextBox Name="SurnameInput" Grid.Row="1" Grid.Column="1" Margin="10 5"></TextBox>
             <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Margin="0 10 10 10">
                 <GroupBox.Header>
                     <CheckBox Name="DetailsCheckbox">Dane szczegółowe</CheckBox>
