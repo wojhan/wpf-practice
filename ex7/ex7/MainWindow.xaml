@@ -15,9 +15,16 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <ListBox Name="usersList" Margin="10" Padding="5 5 0 5" SelectionChanged="usersList_SelectionChanged">
-
+            <ListBox.Template>
+                <ControlTemplate>
+                    <StackPanel>
+                        <ItemsPresenter/>
+                        <ListBoxItem MouseDoubleClick="ListBoxItem_MouseDoubleClick" Content="dodaj nową osobę..."/>
+                    </StackPanel>
+                </ControlTemplate>
+            </ListBox.Template>
         </ListBox>
-        <Grid Grid.Column="1" Margin="10">
+        <Grid Grid.Column="1" Margin="10" DataContext="{Binding ElementName=usersList, Path=SelectedItem}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -29,14 +36,14 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Margin="0 5">Imię</Label>
-            <TextBox Name="FirstNameInput" Grid.Column="1" Margin="10 5" Text=""></TextBox>
+            <TextBox Name="FirstNameInput" Grid.Column="1" Margin="10 5" Text="{Binding Path=Firstname}"></TextBox>
             <Label Grid.Row="1" Margin="0 5">Nazwisko</Label>
-            <TextBox Name="SurnameInput" Grid.Row="1" Grid.Column="1" Margin="10 5"></TextBox>
+            <TextBox Name="SurnameInput" Grid.Row="1" Grid.Column="1" Margin="10 5" Text="{Binding Path=Surname}"></TextBox>
             <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Margin="0 10 10 10">
                 <GroupBox.Header>
-                    <CheckBox Name="DetailsCheckbox">Dane szczegółowe</CheckBox>
+                    <CheckBox Name="DetailsCheckbox" IsChecked="{Binding Path=Details}">Dane szczegółowe</CheckBox>
                 </GroupBox.Header>
-                <Grid>
+                <Grid Name="Details" IsEnabled="{Binding Path=Details}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -44,19 +51,19 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="76.809"/>
+                        <ColumnDefinition Width="19.191"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Margin="0 5">Adres E-mail</Label>
-                    <TextBox Name="EmailInput" Grid.Column="1" Margin="10 5 0 5"></TextBox>
-                    <Label Grid.Row="1" Margin="0 5">Kwota wpłaty</Label>
-                    <TextBox Name="CashInput" Grid.Row="1" Grid.Column="1" Margin="10 5 0 5"></TextBox>
-                    <Label Grid.Row="2" Margin="0 5" VerticalAlignment="Center">Lokalizacja</Label>
-                    <ComboBox Name="Location" Grid.Row="2" Grid.Column="1" Margin="10 5 0 5" Padding="10">
-                        <ComboBoxItem IsSelected="True">Białystok</ComboBoxItem>
+                    <Label Margin="0 5" Grid.ColumnSpan="2">Adres E-mail</Label>
+                    <TextBox Name="EmailInput" Grid.Column="2" Margin="10 5 0 5" Text="{Binding Path=Email}"></TextBox>
+                    <Label Grid.Row="1" Margin="0 5" Grid.ColumnSpan="2">Kwota wpłaty</Label>
+                    <TextBox Name="CashInput" Grid.Row="1" Grid.Column="2" Margin="10 5 0 5" Text="{Binding Path=Payment}"></TextBox>
+                    <Label Grid.Row="2" Margin="0,10" VerticalAlignment="Center" Grid.ColumnSpan="2">Lokalizacja</Label>
+                    <ComboBox Name="Location" Grid.Row="2" Grid.Column="2" Margin="10 5 0 5" Padding="10" SelectedItem="{Binding Path=Location}">
                     </ComboBox>
-                    <Label Grid.Row="3" Margin="0 5">Poziom dostępu</Label>
-                    <Slider Name="AccessLevel" Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="4" Margin="10 5 0 5"></Slider>
+                    <Label Grid.Row="3" Margin="0 5" Grid.ColumnSpan="2">Poziom dostępu</Label>
+                    <Slider Name="AccessLevel" Grid.Row="3" Grid.Column="2" Minimum="0" Maximum="4" Margin="10 5 0 5" Value="{Binding Path=AccessLevel}"></Slider>
                 </Grid>
             </GroupBox>
             <Button VerticalAlignment="Top" Grid.Row="3" Grid.ColumnSpan="2" Margin="10 5" Padding="5 10">Usuń</Button>

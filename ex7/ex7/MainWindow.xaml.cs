@@ -24,39 +24,19 @@ namespace ex7
         {
             InitializeComponent();
             usersList.ItemsSource = UserManager.Instance.Users;
-            string test = "dodaj nową osobę...";
-            UserManager.Instance.Users.Add(test);
-            //ListBoxItem addUser = usersList.ItemsSourc
-            ListBoxItem addUser = (ListBoxItem)(usersList.ItemContainerGenerator.ContainerFromIndex(0));
-
-            CommandBinding addUserBind = new CommandBinding();
-            addUserBind.Command = UserCommands.AddUser;
-            //addUser.CommandBindings.Add(addUserBind);
-
-            //usersList.Items.Add((new ListBoxItem()).Content = "Dodaj nową osobę...");
+            Location.ItemsSource = Enum.GetValues(typeof(LocationEnum)).Cast<LocationEnum>();
+            usersList.DisplayMemberPath = "Desc";
         }
 
-        private void usersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            int index = usersList.SelectedIndex;
-            
-            if(index != UserManager.Instance.Users.Count - 1)
-            {
-                FirstNameInput.Text = UserManager.Instance.GetUser(index).FirstName;
-                SurnameInput.Text = UserManager.Instance.GetUser(index).Surname;
-                EmailInput.Text = UserManager.Instance.GetUser(index).Email;
-            }
-                
-        }
-
-        private void AddUser_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void DetailsCheckbox_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             MessageBox.Show("test");
         }
 
-        private void AddUser_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            e.CanExecute = true;
+            User user = new User();
+            UserManager.Instance.Users.Add(user);
         }
     }
 }

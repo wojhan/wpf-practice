@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ex7
 {
-    enum Location
+    public enum LocationEnum
     {
         Białystok,
         Warszawa,
