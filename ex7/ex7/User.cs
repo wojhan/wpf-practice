@@ -24,7 +24,7 @@ namespace ex7
             set
             {
                 firstname = value;
-                OnPropertyChanged("");
+                OnPropertyChanged("Desc");
             }
         }
 
@@ -37,7 +37,7 @@ namespace ex7
             set
             {
                 surname = value;
-                OnPropertyChanged("");
+                OnPropertyChanged("Desc");
             }
         }
 
@@ -50,7 +50,7 @@ namespace ex7
             set
             {
                 email = value;
-                OnPropertyChanged("");
+                OnPropertyChanged("Desc");
             }
         }
 
@@ -116,7 +116,7 @@ namespace ex7
         }
         private UserManager()
         {
-            users.Add(new User() { Firstname = "Jan", Surname = "Kowalski", Email = "jan@kowalski.pl", IsDetailsChecked = false });
+            
         }
         private static UserManager singleton = null;
         public static UserManager Instance

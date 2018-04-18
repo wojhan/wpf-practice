@@ -37,6 +37,30 @@ namespace ex7
         {
             User user = new User();
             UserManager.Instance.Users.Add(user);
+            usersList.SelectedIndex = usersList.Items.Count - 1;
+        }
+
+        private void DeleteUser_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if(usersList.SelectedItem != null)
+            {
+                e.CanExecute = true;
+            }
+        }
+
+        private void DeleteUser_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            int index = usersList.SelectedIndex;
+            UserManager.Instance.Users.RemoveAt(index);
+            usersList.SelectedIndex = index - 1;
+        }
+
+        private void usersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(usersList.SelectedItem != null)
+            {
+                
+            }
         }
     }
 }

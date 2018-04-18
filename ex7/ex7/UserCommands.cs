@@ -9,17 +9,17 @@ namespace ex7
 {
     public class UserCommands
     {
-        private static RoutedUICommand addUser;
+        private static RoutedUICommand deleteUser;
         static UserCommands()
         {
-            addUser = new RoutedUICommand(
-                "Add new user", "AddUser", typeof(UserCommands));
+            deleteUser = new RoutedUICommand(
+                "Delete a user", "DeleteUser", typeof(UserCommands));
 
             //addUser.InputGestures.Add(new MouseGesture(MouseAction.LeftClick));
         }
-        public static RoutedUICommand AddUser
+        public static RoutedUICommand DeleteUser
         {
-            get { return addUser; }
+            get { return deleteUser; }
         }
     }
 }

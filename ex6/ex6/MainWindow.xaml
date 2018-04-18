@@ -8,7 +8,7 @@
         Title="Hanoi" Width="400" SizeToContent="Height" FontSize="20">
     <Window.CommandBindings>
         <CommandBinding Command="local:HanoiCommands.PickUp" Executed="PickUp_Executed" CanExecute="PickUp_CanExecute"/>
-        <CommandBinding Command="local:HanoiCommands.PutDown" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+        <CommandBinding Command="local:HanoiCommands.PutDown" Executed="PutDown_Executed" CanExecute="PutDown_CanExecute"/>
     </Window.CommandBindings>
     <Grid Margin="3">
         <Grid.RowDefinitions>
@@ -23,15 +23,15 @@
         </Grid.ColumnDefinitions>
         <TextBox Name="Temp" Grid.ColumnSpan="3" Margin="3" IsReadOnly="True" HorizontalContentAlignment="Center"/>
         <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
-            <Button Command="local:HanoiCommands.PickUp" CommandParameter="{Binding ElementName=A}" CommandTarget="{Binding ElementName=Temp}"  Margin="3" Padding="10, 5">&#x2191;</Button>
+            <Button Command="local:HanoiCommands.PickUp" CommandParameter="{Binding ElementName=A}" Margin="3" Padding="10, 5">&#x2191;</Button>
             <Button Command="local:HanoiCommands.PutDown" CommandParameter="{Binding ElementName=A}" Margin="3" Padding="10, 5">&#x2193;</Button>
         </WrapPanel>
         <WrapPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
-            <Button Command="local:HanoiCommands.PickUp" CommandParameter="{Binding ElementName=B}" CommandTarget="{Binding ElementName=Temp}" Margin="3" Padding="10, 5">&#x2191;</Button>
+            <Button Command="local:HanoiCommands.PickUp" CommandParameter="{Binding ElementName=B}" Margin="3" Padding="10, 5">&#x2191;</Button>
             <Button Command="local:HanoiCommands.PutDown" CommandParameter="{Binding ElementName=B}" Margin="3" Padding="10, 5">&#x2193;</Button>
         </WrapPanel>
         <WrapPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
-            <Button Command="local:HanoiCommands.PickUp" CommandParameter="{Binding ElementName=C}" CommandTarget="{Binding ElementName=Temp}" Margin="3" Padding="10, 5">&#x2191;</Button>
+            <Button Command="local:HanoiCommands.PickUp" CommandParameter="{Binding ElementName=C}" Margin="3" Padding="10, 5">&#x2191;</Button>
             <Button Command="local:HanoiCommands.PutDown" CommandParameter="{Binding ElementName=C}" Margin="3" Padding="10, 5">&#x2193;</Button>
         </WrapPanel>
         <ListBox Name="A" Grid.Row="2" Margin="15,3" VerticalAlignment="Bottom" HorizontalContentAlignment="Center">

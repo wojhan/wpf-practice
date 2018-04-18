@@ -29,10 +29,9 @@ namespace ex6
 
         private void PickUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            ListBox list = e.Parameter as ListBox;
-            if(list != null)
+            if (e.Parameter is ListBox list)
             {
-                if (Temp.Text == "" && list.Items.Count > 0)
+                if (Temp.Text == "" && list.HasItems)
                 {
                     e.CanExecute = true;
                 }
@@ -48,12 +47,11 @@ namespace ex6
             Temp.Text = item.Content.ToString();
         }
 
-        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void PutDown_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            ListBox list = e.Parameter as ListBox;
-            if(list != null && Temp.Text != "")
+            if (e.Parameter is ListBox list && Temp.Text != "")
             {
-                if (list.Items.Count == 0)
+                if (!list.HasItems)
                 {
                     e.CanExecute = true;
                 }
@@ -69,7 +67,7 @@ namespace ex6
             }
         }
 
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void PutDown_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ListBox list = e.Parameter as ListBox;
             list.Items.Insert(0,tmp);
